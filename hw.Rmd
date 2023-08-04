@@ -1,0 +1,209 @@
+---
+title: "Homework 3"
+output: html_notebook
+---
+
+| Homework 3                     |               Data Programming in R |
+| :---                           |                                ---: |
+| Due by 11:59 PM on Wed Sep 14  | Business Analytics Graduate Program |
+| Submit via GitHub              |     BAIS:6060 Fall 2022 (Part-Time) |
+
+# Instructions
+
+Follow all of the guidelines given on prior homeworks, referring to
+them as necessary. Here is an important reminder: include the required
+`library(...)` commands in your notebook.
+
+Also included with this homework is the solution for exercise #1 within
+the included file `soln.Rdata`. To see this solution, execute this
+command at the console: `load("soln.Rdata", soln <- new.env())`. Points
+will be deducted if your solution loads or uses `soln.Rdata` explicitly.
+
+# Exercises
+
+
+
+## #1
+
+Carefully review the included files `movies.txt` and `movies.csv`
+(taking note of the column classes!) and then complete the following
+exercises.
+
+### (a)
+
+Read the data correctly into `df`.
+
+```{r}
+
+```
+
+### (b)
+
+Create a new column `df$GrossRatio`, which equals the ratio of
+`TotalGross` over `OpeningGross`. [Hint: For each movie, the value of
+the ratio should be greater than or equal to 1.0. Do not round.]
+
+```{r}
+
+```
+
+### (c)
+
+Rename the levels of `df$Studio` according to the following table:
+
+    "WB"        "Warner Brothers"
+    "Uni."      "Universal"
+    "BV"        "Buena Vista"
+    "Fox"       "Fox" (i.e., no change)
+    "Par."      "Paramount"
+    "Sony"      "Sony" (i.e., no change)
+    "MGM"       "MGM" (i.e., no change)
+    "Mira."     "Miramax"
+
+```{r}
+
+```
+
+### (d)
+
+Now rename all other levels not listed in the prior exercise to "Other",
+i.e., merge all those levels to "Other". [Hint: The commands
+
+    to_keep <- c("Warner Brothers", "Universal", "Fox")
+    to_merge <- setdiff(levels(df$Studio), to_keep)
+
+    df <- mutate(df, Studio = fct_collapse(Studio, Other = to_merge))
+
+would merge everything but "Warner Brothers", "Universal", and "Fox".
+But that would merge too much. Alter the command to make sure the merge
+is correct.]
+
+```{r}
+
+```
+
+### (e)
+
+Now overwrite `df$Studio` so that its levels are in alphabetical
+order---except that "Other" is the last level.
+
+```{r}
+
+```
+
+### (f)
+
+Use the `cut(...)` command with options
+
+    breaks = quantile(df$GrossRatio)
+
+and
+
+    include.lowest = TRUE
+
+to create a new factor column `df$Stamina`, which groups the movies by
+their `GrossRatio` quartile. Make sure the levels of `df$Stamina` are
+"Weaker", "Weak", "Strong", and "Stronger" in that order, which can be
+done: (i) inside the `cut` command using its `labels` option; (ii) or
+using `dplyr` commands after `df$Stamaina` is created.
+
+[Hints: If done correctly, there should be no `NA`'s in `df$Stamina`.
+"Weaker" movies are those that enjoy a lot of initial interest from
+audiences, but then interest dwindles relatively quickly over time
+(e.g., *Avengers: Endgame*), whereas "Stronger" movies enjoy continued
+audience interest over time (e.g,. *E.T.: The Extra-Terrestrial*).]
+
+```{r}
+
+```
+
+## #2
+
+The overall goal of this exercise, which is broken down into several
+parts, is to determine which studio has the highest percentage of
+"Stronger" movies among its own movie releases. [Hint: The answer should
+be Miramax.]
+
+### (a)
+
+In a new object `part_a`, save a summary of `df`, which counts the
+number of records in each group defined by the two columns `Studio` and
+`Stamina`. Call the summary column `number`. After `part_a` is created,
+also execute the command `df <- ungroup(df)` to remove any groupings on
+`df` that you created.
+
+```{r}
+
+```
+
+### (b)
+
+Copy `part_a` to a new object `part_b`, and then group `part_b`
+by `Studio`. Next use the `mutate(...)` command to create a new
+column in `part_b`, called `percent`, which equals the calculation
+`number/sum(number)`, where `number` refers to the column in `part_b`,
+which came from `part_a`.
+
+```{r}
+
+```
+
+### (c)
+
+Finally, create a table from `part_b`, which has `Studio` as the rows,
+`Stamina` as the columns, and values from the `percent` column. Save the
+result in an object called `part_c`.
+
+```{r}
+
+
+```
+
+## #3
+
+In the console, the command
+
+    as.factor(10*floor(as.numeric(format(df$OpeningDate, "%Y")) / 10))
+
+creates a factor vector, which shows the decade each movie was released,
+e.g., "1980" stands for the 1980's, "1990" stands for the 1990's, etc.
+Incorporating this idea, use a single command with the pipe operator to
+create a table called `num_3`, which has `Studio` as the rows and the
+decade as the columns and which shows the total number of movies in each
+studio-decade pair. Do not overwrite `df` during this process.
+
+```{r}
+
+
+```
+
+## #4
+
+Undo the grouping on `df`, and then use `dplyr` functions and the pipe
+operator to create a single command (probably split over several lines
+in your notebook) that creates a data frame called `top_movies` with the
+following structure and content (please no extra columns):
+
+    Title | OpeningDate | TotalGross | GrossRatio
+    ---------------------------------------------
+     ...  |     ...     |    ...     |    ...
+     ...  |     ...     |    ...     |    ...
+
+
+- The rows in `top_movies` correspond to the top-10 movies in terms of
+having the highest values of `GrossRatio`, among all movies with at
+least $100,000,000 in total gross and at least 1,000 opening theaters.
+
+- The movies are sorted by `OpeningDate`, newest to oldest.
+
+[Hint: In addition to the main `dplyr` commands taught in the
+module, try using the `slice_max(...)` function as described here:
+https://dplyr.tidyverse.org/reference/slice.html. The `slice_max`
+function was also used in the Module 3 lesson. To get started, try
+something like `df %>% slice_max(GrossRatio, n = 10)` in the console.
+Partial credit will be given if the correct answer is gotten using
+techniques different than those specified.]
+
+```{r}
+
+```
