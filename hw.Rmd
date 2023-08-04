@@ -3,10 +3,10 @@ title: "Homework 3"
 output: html_notebook
 ---
 
-| Homework 3                     |               Data Programming in R |
+| Homework 3                     |                Data Analysis with R |
 | :---                           |                                ---: |
-| Due by 11:59 PM on Wed Sep 14  | Business Analytics Graduate Program |
-| Submit via GitHub              |     BAIS:6060 Fall 2022 (Part-Time) |
+| Due by 11:59 PM on Wed Sep 13  | Business Analytics Graduate Program |
+| Submit via GitHub              |                 BAIS:6060 Fall 2023 |
 
 # Instructions
 
