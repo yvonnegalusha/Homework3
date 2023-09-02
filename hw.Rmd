@@ -10,6 +10,9 @@ output: html_notebook
 
 # Instructions
 
+This homework covers Module 3. Refer to the corresponding materials and
+ICE (with solutions) posted on ICON.
+
 Follow all of the guidelines given on prior homeworks, referring to
 them as necessary. Here is an important reminder: include the required
 `library(...)` commands in your notebook.
@@ -21,6 +24,11 @@ will be deducted if your solution loads or uses `soln.Rdata` explicitly.
 
 # Exercises
 
+
+```{r}
+
+
+```
 
 
 ## #1
@@ -35,6 +43,7 @@ Read the data correctly into `df`.
 
 ```{r}
 
+
 ```
 
 ### (b)
@@ -44,6 +53,8 @@ Create a new column `df$GrossRatio`, which equals the ratio of
 the ratio should be greater than or equal to 1.0. Do not round.]
 
 ```{r}
+
+
 
 ```
 
@@ -61,6 +72,8 @@ Rename the levels of `df$Studio` according to the following table:
     "Mira."     "Miramax"
 
 ```{r}
+
+
 
 ```
 
@@ -80,6 +93,8 @@ is correct.]
 
 ```{r}
 
+
+
 ```
 
 ### (e)
@@ -88,6 +103,8 @@ Now overwrite `df$Studio` so that its levels are in alphabetical
 order---except that "Other" is the last level.
 
 ```{r}
+
+
 
 ```
 
@@ -113,7 +130,11 @@ audiences, but then interest dwindles relatively quickly over time
 (e.g., *Avengers: Endgame*), whereas "Stronger" movies enjoy continued
 audience interest over time (e.g,. *E.T.: The Extra-Terrestrial*).]
 
+Write df to file called movies_summary.csv.
+
 ```{r}
+
+
 
 ```
 
@@ -121,8 +142,7 @@ audience interest over time (e.g,. *E.T.: The Extra-Terrestrial*).]
 
 The overall goal of this exercise, which is broken down into several
 parts, is to determine which studio has the highest percentage of
-"Stronger" movies among its own movie releases. [Hint: The answer should
-be Miramax.]
+"Stronger" movies among its own movie releases. 
 
 ### (a)
 
@@ -130,9 +150,11 @@ In a new object `part_a`, save a summary of `df`, which counts the
 number of records in each group defined by the two columns `Studio` and
 `Stamina`. Call the summary column `number`. After `part_a` is created,
 also execute the command `df <- ungroup(df)` to remove any groupings on
-`df` that you created.
+`df` that you created. Write part_a to file called part_a.csv.
 
 ```{r}
+
+
 
 ```
 
@@ -142,9 +164,11 @@ Copy `part_a` to a new object `part_b`, and then group `part_b`
 by `Studio`. Next use the `mutate(...)` command to create a new
 column in `part_b`, called `percent`, which equals the calculation
 `number/sum(number)`, where `number` refers to the column in `part_b`,
-which came from `part_a`.
+which came from `part_a`. Write part_b to file called part_b.csv.
 
 ```{r}
+
+
 
 ```
 
@@ -152,9 +176,10 @@ which came from `part_a`.
 
 Finally, create a table from `part_b`, which has `Studio` as the rows,
 `Stamina` as the columns, and values from the `percent` column. Save the
-result in an object called `part_c`.
+result in an object called `part_c`. Write part_c to file called part_c.csv.
 
 ```{r}
+
 
 
 ```
@@ -170,9 +195,11 @@ e.g., "1980" stands for the 1980's, "1990" stands for the 1990's, etc.
 Incorporating this idea, use a single command with the pipe operator to
 create a table called `num_3`, which has `Studio` as the rows and the
 decade as the columns and which shows the total number of movies in each
-studio-decade pair. Do not overwrite `df` during this process.
+studio-decade pair. Do not overwrite `df` during this process. Write 
+num_3 to file called num_3.csv.
 
 ```{r}
+
 
 
 ```
@@ -202,8 +229,10 @@ https://dplyr.tidyverse.org/reference/slice.html. The `slice_max`
 function was also used in the Module 3 lesson. To get started, try
 something like `df %>% slice_max(GrossRatio, n = 10)` in the console.
 Partial credit will be given if the correct answer is gotten using
-techniques different than those specified.]
+techniques different than those specified.] Write top_movies to file called top_movies.csv.
 
 ```{r}
+
+
 
 ```
